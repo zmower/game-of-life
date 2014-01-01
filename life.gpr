@@ -1,0 +1,6 @@
+with "ncursesada";
+
+project Life is
+   for Exec_Dir use ".";
+   for Main use ("terminal_life.adb");
+end Life;
