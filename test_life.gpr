@@ -1,0 +1,6 @@
+with "ncursesada";
+
+project Test_Life is
+   for Exec_Dir use ".";
+   for Main use ("test_life.adb");
+end Test_Life;

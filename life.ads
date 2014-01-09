@@ -1,3 +1,5 @@
+with Ada.Text_IO;
+
 package Life is
 
    type Cell is (Dead, Alive);
@@ -8,15 +10,17 @@ package Life is
 
    type Table is private;
 
-   procedure Clear (T : in out Table);
+   procedure Kill_All (T : in out Table);
 
    procedure Set (T : in out Table; X, Y : Index; Value : Cell := Alive);
 
    function Get (T : Table; X, Y : Index) return Cell;
 
-   procedure Tick (T : in out Table);
+   procedure Propagate (T : in out Table);
      
-   procedure Print (T : Table);
+   procedure Write
+     (T : Table;
+      To_File : Ada.Text_IO.File_Type := Ada.Text_IO.Standard_Output);
 
 private
 

@@ -1,14 +1,8 @@
-with Ada.Text_IO;
-
 package body Life is
 
    function T2I (C : Cell) return Integer is
    begin
-      if C = Alive then
-         return 1;
-      else
-         return 0;
-      end if;
+      return Cell'Pos (C);
    end T2I;
 
    function Life_Rules (From : Table; I, J : Index) return Cell is
@@ -54,19 +48,15 @@ package body Life is
       return Res;
    end Calc;
      
-   procedure Tick (T : in out Table) is
+   procedure Propagate (T : in out Table) is
    begin
       T := Calc (T);
-   end Tick;
+   end Propagate;
 
-   procedure Clear (T : in out Table) is
+   procedure Kill_All (T : in out Table) is
    begin
-      for I in Index'range loop
-         for J in Index'range loop
-            T (I, J) := Dead;
-         end loop;
-      end loop;
-   end Clear;
+      T := (others => (others => Dead));
+   end Kill_All;
 
    procedure Set (T : in out Table; X, Y : Index; Value : Cell := Alive) is
    begin
@@ -78,21 +68,20 @@ package body Life is
       return T (X, Y);
    end Get;
 
-   procedure Print (T : Table) is
+   procedure Write
+     (T : Table;
+      To_File : Ada.Text_IO.File_Type := Ada.Text_IO.Standard_Output) is
    begin
       for I in Index'range loop
          for J in Index'range loop
             if T (I, J) = Alive then
-               Ada.Text_IO.Put ('X');
+               Ada.Text_IO.Put ('o');
             else
                Ada.Text_IO.Put (' ');
             end if;
          end loop;
          Ada.Text_IO.New_Line;
       end loop;
-      Ada.Text_IO.New_Line;
-      Ada.Text_IO.Put_Line ("---");
-      Ada.Text_IO.New_Line;
-   end Print;
+   end Write;
 
 end Life;
