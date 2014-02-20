@@ -3,4 +3,9 @@ with "ncursesada";
 project Test_Life is
    for Exec_Dir use ".";
    for Main use ("test_life.adb");
+ 	
+   package Compiler is
+      for Default_Switches ("Ada") use ("-gnata");
+   end Compiler;
+
 end Test_Life;

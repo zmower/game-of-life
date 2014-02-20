@@ -1,27 +1,27 @@
-package body Life is
+package body Life_g is
 
    function T2I (C : Cell) return Integer is
    begin
       return Cell'Pos (C);
    end T2I;
 
-   function Life_Rules (From : Table; I, J : Index) return Cell is
-      I_Minus : Index := I - 1;
-      I_Plus : Index := I + 1;
-      J_Minus : Index := J - 1;
-      J_Plus : Index := J + 1;
+   function Life_Rules (From : Table; X : X_Index; Y : Y_Index) return Cell is
+      X_Minus : X_Index := X - 1;
+      X_Plus : X_Index := X + 1;
+      Y_Minus : Y_Index := Y - 1;
+      Y_Plus : Y_Index := Y + 1;
       Total : Integer;
    begin
       Total :=
-        T2I (From (I_Minus, J_Minus)) + 
-        T2I (From (I,       J_Minus)) + 
-        T2I (From (I_Plus,  J_Minus)) + 
-        T2I (From (I_Minus, J      )) + 
-        T2I (From (I_Plus,  J      )) + 
-        T2I (From (I_Minus, J_Plus )) + 
-        T2I (From (I,       J_Plus )) + 
-        T2I (From (I_Plus,  J_Plus ));
-      if From (I, J) = Alive then
+        T2I (From (X_Minus, Y_Minus)) + 
+        T2I (From (X,       Y_Minus)) + 
+        T2I (From (X_Plus,  Y_Minus)) + 
+        T2I (From (X_Minus, Y      )) + 
+        T2I (From (X_Plus,  Y      )) + 
+        T2I (From (X_Minus, Y_Plus )) + 
+        T2I (From (X,       Y_Plus )) + 
+        T2I (From (X_Plus,  Y_Plus ));
+      if From (X, Y) = Alive then
          if Total < 2 or Total > 3 then
             return Dead;
          else
@@ -38,11 +38,11 @@ package body Life is
          
      
    function Calc (From : Table) return Table is
-     Res : Table;
+      Res : Table;
    begin
-     for i in Index'range loop
-        for j in Index'range loop
-           Res (i, j) := Life_Rules(From, i, j);
+      for Y in Y_Index'range loop
+         for X in X_Index'range loop
+            Res (X, Y) := Life_Rules(From, X, Y);
          end loop;
       end loop;
       return Res;
@@ -58,12 +58,16 @@ package body Life is
       T := (others => (others => Dead));
    end Kill_All;
 
-   procedure Set (T : in out Table; X, Y : Index; Value : Cell := Alive) is
+   procedure Set
+     (T : in out Table;
+      X : X_Index;
+      Y : Y_Index;
+      Value : Cell := Alive) is
    begin
       T (X, Y) := Value;
    end Set;
 
-   function Get (T : Table; X, Y : Index) return Cell is
+   function Get (T : Table; X : X_Index; Y : Y_Index) return Cell is
    begin
       return T (X, Y);
    end Get;
@@ -72,9 +76,9 @@ package body Life is
      (T : Table;
       To_File : Ada.Text_IO.File_Type := Ada.Text_IO.Standard_Output) is
    begin
-      for I in Index'range loop
-         for J in Index'range loop
-            if T (I, J) = Alive then
+      for Y in Y_Index'range loop
+         for X in X_Index'range loop
+            if T (X, Y) = Alive then
                Ada.Text_IO.Put ('o');
             else
                Ada.Text_IO.Put (' ');
@@ -84,4 +88,4 @@ package body Life is
       end loop;
    end Write;
 
-end Life;
+end Life_g;

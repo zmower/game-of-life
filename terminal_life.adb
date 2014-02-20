@@ -1,11 +1,16 @@
-with Life;
+with Life_g;
 with Terminal_Interface.Curses.Text_IO;
 use Terminal_Interface.Curses;
 
 procedure Terminal_Life is
 
+   type Index_X is mod 16;
+   type Index_Y is mod 16;
+   package Life is new Life_g (Index_X, Index_Y);
+
    -- Cursor position in table
-   Cursor_X, Cursor_Y : Life.Index := 0;
+   Cursor_X : Index_X := 0;
+   Cursor_Y : Index_Y := 0;
    Draw_Cursor : Boolean := True;
 
    -- Display the Life data in the Curses window.
@@ -18,9 +23,9 @@ procedure Terminal_Life is
 
       Clear (W);
 
-      for X in Life.Index'range loop
+      for X in Index_X'range loop
 
-         for Y in Life.Index'range loop
+         for Y in Index_Y'range loop
 
             if Life.Get (T, X, Y) = Life.Alive then
 
@@ -55,7 +60,6 @@ procedure Terminal_Life is
    Current : Life.Table;
    ctrl_Z : constant Real_Key_Code := 26;
    Key : Key_Code;
-   use type Life.Index;
 
 begin
 
