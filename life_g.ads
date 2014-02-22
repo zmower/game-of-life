@@ -12,6 +12,8 @@ package Life_g is
 
    type Table is private;
 
+   Empty_Table : constant Table;
+
    procedure Kill_All (T : in out Table);
 
    procedure Set
@@ -31,5 +33,6 @@ package Life_g is
 private
 
    type Table is array (X_Index, Y_Index) of Cell;
+   Empty_Table : constant Table  := (others => (others => Dead));
 
 end Life_g;

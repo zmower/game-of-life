@@ -57,13 +57,11 @@ procedure Terminal_Life is
 
    end Display;
 
-   Current : Life.Table;
+   Current : Life.Table := Life.Empty_Table;
    ctrl_Z : constant Real_Key_Code := 26;
    Key : Key_Code;
 
 begin
-
-   Life.Kill_All (Current);
 
    Init_Screen;
 
