@@ -79,12 +79,12 @@ package body Life_g is
       for Y in Y_Index'range loop
          for X in X_Index'range loop
             if T (X, Y) = Alive then
-               Ada.Text_IO.Put ('o');
+               Ada.Text_IO.Put (To_File, 'o');
             else
-               Ada.Text_IO.Put (' ');
+               Ada.Text_IO.Put (To_File, ' ');
             end if;
          end loop;
-         Ada.Text_IO.New_Line;
+         Ada.Text_IO.New_Line (To_File);
       end loop;
    end Write;
 

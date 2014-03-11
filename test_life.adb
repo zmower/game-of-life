@@ -33,6 +33,10 @@ begin
    Life.Set (T, 2, 5);
 
    pragma Assert (Life.Get (T, 0, 0) = Life.Alive, "Set/Get failed");
+   pragma Assert (Life.Get (T, 1, 1) = Life.Alive, "Set/Get failed");
+   pragma Assert (Life.Get (T, 2, 3) = Life.Alive, "Set/Get failed");
+   pragma Assert (Life.Get (T, 2, 4) = Life.Alive, "Set/Get failed");
+   pragma Assert (Life.Get (T, 2, 5) = Life.Alive, "Set/Get failed");
 
    declare
       F : Ada.Text_IO.File_Type;
@@ -50,4 +54,5 @@ begin
          null;
       end loop;
    end loop;
+
 end Test_Life;
