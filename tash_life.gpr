@@ -1,0 +1,6 @@
+with "tash";
+
+project Tash_Life is
+   for Exec_Dir use ".";
+   for Main use ("tash_life.adb");
+end Tash_Life;

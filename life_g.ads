@@ -1,3 +1,8 @@
+--  This generic is OK as long as you know the size of the area you want.
+--  Something like finding the screen size at runtime and creating a table
+--  that size doesn't work well in Ada (well, it would require pointers
+--  and dynamic memory allocation).  An exercise for the reader...
+
 with Ada.Text_IO;
 
 generic
@@ -33,6 +38,7 @@ package Life_g is
 private
 
    type Table is array (X_Index, Y_Index) of Cell;
+
    Empty_Table : constant Table  := (others => (others => Dead));
 
 end Life_g;

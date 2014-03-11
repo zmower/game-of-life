@@ -1,4 +1,5 @@
 *.o
 *.ali
+tash_life
 terminal_life
 test_life

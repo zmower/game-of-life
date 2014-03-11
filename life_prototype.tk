@@ -1,0 +1,21 @@
+#!/usr/bin/wish
+
+proc toggle {widget} {
+  set c [$widget cget -text]
+  if {$c == "o"} {
+    set nv " "
+  } else {
+    set nv "o"
+  }
+  $widget configure -text $nv
+}
+
+for {set r 0} {$r < 20} {incr r} {
+   for {set c 0} {$c < 40} {incr c} {
+      set name .b${r}_${c}
+      button $name -text "o" -padx 0 -pady 0 -command "toggle $name"
+      grid $name -row $r -column $c
+   }
+}
+button .b -text "Generate"
+grid .b -row 20 -column 17 -columnspan 6
