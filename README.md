@@ -8,5 +8,5 @@ Key bindings in the terminal version:
 
 w/a/s/d or cursor keys -  move the cursor around.
 space - set the cell indicated by the cursor
-ctel-Z - was supposed to exit but seems to put it into the background (sigh)
+ctel-D - exits the game
 any other key - generate the next cycle of life

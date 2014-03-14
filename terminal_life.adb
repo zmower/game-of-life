@@ -58,7 +58,7 @@ procedure Terminal_Life is
    end Display;
 
    Current : Life.Table := Life.Empty_Table;
-   ctrl_Z : constant Real_Key_Code := 26;
+   ctrl_D : constant Real_Key_Code := 4;
    Key : Key_Code;
 
 begin
@@ -73,7 +73,7 @@ begin
 
       case Key is
 
-        when ctrl_Z => exit;
+        when ctrl_D => exit;
 
         when Key_Cursor_Up | Character'Pos ('w') =>
 
