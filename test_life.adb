@@ -7,7 +7,7 @@ procedure Test_Life is
    type Index_X is mod 16;
    type Index_Y is mod 16;
    package Life is new Life_g (Index_X, Index_Y);
-   T : Life.Table := Life.Empty_Table;
+   T, U, V : Life.Table := Life.Empty_Table;
    use type Life.Cell;
 
 begin
@@ -46,6 +46,8 @@ begin
       Ada.Text_IO.Close (F);
    end;
 
+   U := T;
+
    Life.Kill_All (T);
 
    for X in Index_X'range loop
@@ -54,5 +56,16 @@ begin
          null;
       end loop;
    end loop;
+
+   declare
+      F : Ada.Text_IO.File_Type;
+   begin
+      Ada.Text_IO.Open
+        (File => F,
+         Mode => Ada.Text_IO.In_File,
+         Name => "test_output.txt"); 
+      V := Life.Read (F);
+      pragma Assert (U = V, "Read failed");
+   end;
 
 end Test_Life;

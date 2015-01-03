@@ -35,6 +35,10 @@ package Life_g is
      (T : Table;
       To_File : Ada.Text_IO.File_Type := Ada.Text_IO.Standard_Output);
 
+   function Read
+     (From_File : Ada.Text_IO.File_Type := Ada.Text_IO.Standard_Input)
+   return Table;
+
 private
 
    type Table is array (X_Index, Y_Index) of Cell;

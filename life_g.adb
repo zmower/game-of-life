@@ -55,7 +55,7 @@ package body Life_g is
 
    procedure Kill_All (T : in out Table) is
    begin
-      T := (others => (others => Dead));
+      T := Empty_Table;
    end Kill_All;
 
    procedure Set
@@ -87,5 +87,25 @@ package body Life_g is
          Ada.Text_IO.New_Line (To_File);
       end loop;
    end Write;
+
+   function Read
+     (From_File : Ada.Text_IO.File_Type := Ada.Text_IO.Standard_Input)
+   return Table is
+      Ch : Character;
+      T : Table;
+   begin
+      for Y in Y_Index'range loop
+         for X in X_Index'range loop
+            Ada.Text_IO.Get (From_File, Ch);
+            if Ch = 'o' then
+               T (X, Y) := Alive;
+            else
+               T (X, Y) := Dead;
+            end if;
+         end loop;
+         Ada.Text_IO.Skip_Line (From_File);
+      end loop;
+      return T;
+   end Read;
 
 end Life_g;
