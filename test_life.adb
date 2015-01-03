@@ -59,6 +59,7 @@ begin
 
    declare
       F : Ada.Text_IO.File_Type;
+      use type Life.Table;
    begin
       Ada.Text_IO.Open
         (File => F,
@@ -67,5 +68,21 @@ begin
       V := Life.Read (F);
       pragma Assert (U = V, "Read failed");
    end;
+
+   Life.Propagate (V);
+
+   -- Alive and now..
+   pragma Assert (Life.Get (V, 0, 0) = Life.Dead, "00 propagation error");
+   pragma Assert (Life.Get (V, 1, 1) = Life.Alive, "11 propagation error");
+   pragma Assert (Life.Get (V, 2, 2) = Life.Alive, "22 propagation error");
+   pragma Assert (Life.Get (V, 2, 3) = Life.Alive, "23 propagation error");
+   pragma Assert (Life.Get (V, 2, 4) = Life.Alive, "24 propagation error");
+   pragma Assert (Life.Get (V, 2, 5) = Life.Dead, "25 propagation error");
+   -- Dead and now Alive..
+   pragma Assert (Life.Get (V, 1, 2) = Life.Alive, "12 propagation error");
+   pragma Assert (Life.Get (V, 3, 3) = Life.Alive, "33 propagation error");
+   pragma Assert (Life.Get (V, 3, 4) = Life.Alive, "34 propagation error");
+   -- Dead and still Dead..
+   pragma Assert (Life.Get (V, 3, 5) = Life.Dead, "35 propagation error");
 
 end Test_Life;
