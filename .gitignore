@@ -1,5 +1,8 @@
 *.o
 *.ali
+b~*
+*~
+gtk_life
 tash_life
 terminal_life
 test_life

@@ -1,0 +1,4 @@
+with "gtkada";
+project Gtk_Life is
+	for Main use ("gtk_life.adb");
+end Gtk_Life;
